@@ -36,15 +36,17 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${students}" var="student">
 					<tr>
-						<th scope="row">1</th>
-						<td>Sath</td>
-						<td>S</td>
-						<td>Jaffna</td>
-						<td>0778784161</td>
-						<td><i class="far fa-edit"></i></td>
-						<td><i class="fas fa-trash"></i></td>
+						<th scope="row"><c:out value="${student.studentId}"/></th>
+						<td><c:out value="${student.firstName}"/></td>
+						<td><c:out value="${student.lastName}"/></td>
+						<td><c:out value="${student.address}"/></td>
+						<td><c:out value="${student.contactNumber}"/></td>
+						<td><a href="<c:url value="/edit-student/${student.studentId}" />"><i class="far fa-edit"></i></a></td>
+						<td><a href="<c:url value="/delete-student/${student.studentId}" />"><i class="fas fa-trash"></i></a></td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

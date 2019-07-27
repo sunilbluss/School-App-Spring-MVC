@@ -15,7 +15,7 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<title>Add Student | School App</title>
+<title>Edit Student | School App</title>
 </head>
 <body>
 	<%@include file="nav_bar.jsp"%>
@@ -33,10 +33,11 @@
 		</div>
 		</c:if>
 		
-		<h2>Add Student Details</h2>
-		
-		<c:url var="addAction" value="/add-student" ></c:url>
-		<form:form class="mt-3" action="${addAction}" method="post" modelAttribute="student">
+		<h2>Edit Student Details</h2>
+
+		<c:url var="editAction" value="/edit-student" ></c:url>
+		<form:form class="mt-3" action="${editAction}" method="post" modelAttribute="student">
+			<form:hidden  path="studentId" />
 			<div class="form-group">
 				<label for="firstName">First Name</label> 
 				<form:input path="firstName" type="text" class="form-control" id="firstName" aria-describedby="firstNameHelp" placeholder="First Name" /> 
