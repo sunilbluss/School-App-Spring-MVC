@@ -14,41 +14,26 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<title>Student | School App</title>
+<title>Add Course | School App</title>
 </head>
 <body>
 	<%@include file="nav_bar.jsp"%>
 
-	<div class="container mt-5">
-		<a href="<c:url value="/add-student" />" class="btn btn-primary float-right">Add Student</a>
-		<h2>Student Details</h2>
-		<div class="table-responsive mt-3">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">First Name</th>
-						<th scope="col">Last Name</th>
-						<th scope="col">Address</th>
-						<th scope="col">Contact Number</th>
-						<th scope="col"></th>
-						<th scope="col"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Sath</td>
-						<td>S</td>
-						<td>Jaffna</td>
-						<td>0778784161</td>
-						<td><i class="far fa-edit"></i></td>
-						<td><i class="fas fa-trash"></i></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	
+	<div class="container mt-3 mb-3">
+
+		<a href="<c:url value="/course" />" class="btn btn-light btn-lg mb-3">Back</a>
+		
+		<h2>Add Course Details</h2>
+
+		<form class="mt-3">
+			<div class="form-group">
+				<label for="courseName">Course Name</label> 
+				<input type="text" class="form-control" id="courseName" aria-describedby="courseNameHelp" placeholder="Course Name" required> 
+				<small id="courseNameHelp" class="form-text text-muted">Enter the course name.</small>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		
 	</div>
 
 	<!-- Optional JavaScript -->

@@ -14,23 +14,20 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<title>Student | School App</title>
+<title>Course | School App</title>
 </head>
 <body>
 	<%@include file="nav_bar.jsp"%>
 
 	<div class="container mt-5">
-		<a href="<c:url value="/add-student" />" class="btn btn-primary float-right">Add Student</a>
-		<h2>Student Details</h2>
+		<a href="<c:url value="/add-course" />" class="btn btn-primary float-right">Add Course</a>
+		<h2>Course Details</h2>
 		<div class="table-responsive mt-3">
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">First Name</th>
-						<th scope="col">Last Name</th>
-						<th scope="col">Address</th>
-						<th scope="col">Contact Number</th>
+						<th scope="col">Name</th>
 						<th scope="col"></th>
 						<th scope="col"></th>
 					</tr>
@@ -38,17 +35,13 @@
 				<tbody>
 					<tr>
 						<th scope="row">1</th>
-						<td>Sath</td>
-						<td>S</td>
-						<td>Jaffna</td>
-						<td>0778784161</td>
+						<td>Maths</td>
 						<td><i class="far fa-edit"></i></td>
 						<td><i class="fas fa-trash"></i></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-	
 	</div>
 
 	<!-- Optional JavaScript -->

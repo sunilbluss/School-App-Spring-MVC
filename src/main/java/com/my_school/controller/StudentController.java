@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class StudentController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)    
-    public String showStudent(Model m){
+    public String showStudentView(Model m){
         return "student";   
-    }   
+    }  
+	
+	@RequestMapping(value = "/add-student", method = RequestMethod.GET)    
+    public String showAddStudentView(Model m){
+        return "add_student";   
+    } 
 
 }
