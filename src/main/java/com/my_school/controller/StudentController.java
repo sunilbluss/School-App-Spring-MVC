@@ -48,9 +48,14 @@ public class StudentController {
     }
 	
 	@RequestMapping(value="/delete-student/{id}",method = RequestMethod.GET)    
-    public String delete(@PathVariable int id){    
-		studentService.deleteStudent(id);
-		return "redirect:/";    
+    public String delete(@PathVariable int id){   
+		try {
+			studentService.deleteStudent(id);
+			return "redirect:/";    
+		}
+		catch(Exception e) {
+			return "redirect:/";
+		}
     } 
 	
 	@RequestMapping(value = "/edit-student/{id}", method = RequestMethod.GET)    

@@ -20,7 +20,7 @@
 	<%@include file="nav_bar.jsp"%>
 
 	<div class="container mt-5">
-		<a href="<c:url value="/add-course" />" class="btn btn-primary float-right">Add Course</a>
+		<a href="<c:url value="/course/add-course" />" class="btn btn-primary float-right">Add Course</a>
 		<h2>Course Details</h2>
 		<div class="table-responsive mt-3">
 			<table class="table table-striped">
@@ -33,12 +33,14 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:forEach items="${courses}" var="course">
 					<tr>
-						<th scope="row">1</th>
-						<td>Maths</td>
-						<td><i class="far fa-edit"></i></td>
-						<td><i class="fas fa-trash"></i></td>
+						<th scope="row"><c:out value="${course.courseId}"/></th>
+						<td><c:out value="${course.courseName}"/></td>
+						<td><a href="<c:url value="/course/edit-course/${course.courseId}" />"><i class="far fa-edit"></i></a></td>
+						<td><a href="<c:url value="/course/delete-course/${course.courseId}" />"><i class="fas fa-trash"></i></a></td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

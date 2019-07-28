@@ -46,5 +46,9 @@
 	<bean id="studentDAOImpl" class="com.my_school.dao.StudentDAOImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
+	
+	<bean id="courseDAOImpl" class="com.my_school.dao.CourseDAOImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
 
 </beans>  
