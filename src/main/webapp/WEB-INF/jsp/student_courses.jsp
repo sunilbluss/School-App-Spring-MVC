@@ -14,45 +14,37 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<title>Student | School App</title>
+<title>Student Courses | School App</title>
 </head>
 <body>
 	<%@include file="nav_bar.jsp"%>
 
-	<div class="container mt-5">
-		<a href="<c:url value="/add-student" />" class="btn btn-primary float-right">Add Student</a>
-		<h2>Student Details</h2>
+	<div class="container mt-3 mb-3">
+	
+		<a href="<c:url value="/" />" class="btn btn-light btn-lg mb-3">Back</a>
+	
+		<a href="<c:url value="/student-course/add-course/${studentId}" />" class="btn btn-primary float-right">Add Student Course</a>
+		<h2>Student Course Details</h2>
 		<div class="table-responsive mt-3">
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th scope="col">#</th>
-						<th scope="col">First Name</th>
-						<th scope="col">Last Name</th>
-						<th scope="col">Address</th>
-						<th scope="col">Contact Number</th>
-						<th scope="col"></th>
-						<th scope="col"></th>
+						<th scope="col">Name</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${students}" var="student">
+					<c:forEach items="${courses}" var="course">
 					<tr>
-						<th scope="row"><c:out value="${student.studentId}"/></th>
-						<td><c:out value="${student.firstName}"/></td>
-						<td><c:out value="${student.lastName}"/></td>
-						<td><c:out value="${student.address}"/></td>
-						<td><c:out value="${student.contactNumber}"/></td>
-						<td><a href="<c:url value="/student-course/${student.studentId}" />"><i class="fas fa-book-open"></i></a></td>
-						<td><a href="<c:url value="/edit-student/${student.studentId}" />"><i class="far fa-edit"></i></a></td>
-						<td><a href="<c:url value="/delete-student/${student.studentId}" />"><i class="fas fa-trash"></i></a></td>
+						<th scope="row"><c:out value="${course.courseId}"/></th>
+						<td><c:out value="${course.courseName}"/></td>
+						<td><a href="<c:url value="/student-course/delete-course/${studentId}/${course.courseId}" />"><i class="fas fa-trash"></i></a></td>
 					</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-	
 	</div>
 
 	<!-- Optional JavaScript -->

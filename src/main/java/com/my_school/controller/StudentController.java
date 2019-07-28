@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.my_school.model.Course;
 import com.my_school.model.Student;
 import com.my_school.service.StudentService;
 
@@ -48,7 +49,7 @@ public class StudentController {
     }
 	
 	@RequestMapping(value="/delete-student/{id}",method = RequestMethod.GET)    
-    public String delete(@PathVariable int id){   
+    public String deleteStudent(@PathVariable int id){   
 		try {
 			studentService.deleteStudent(id);
 			return "redirect:/";    
@@ -85,5 +86,48 @@ public class StudentController {
 		model.addAttribute("msg", "Student updated.");
         return "edit_student";   
     }
+	
+	@RequestMapping(value = "/student-course/{id}", method = RequestMethod.GET)    
+    public String showStudentCourseView(Model model, @PathVariable int id){
+		model.addAttribute("studentId", id);
+		model.addAttribute("courses", studentService.getStudentCourses(id));
+        return "student_courses";   
+    } 
+	
+	@RequestMapping(value = "/student-course/add-course/{id}", method = RequestMethod.GET)    
+    public String addStudentCourseView(Model model, @PathVariable int id){
+		model.addAttribute("studentId", id);
+		model.addAttribute("course", new Course());
+		model.addAttribute("status", null);
+		model.addAttribute("msg", null);
+		model.addAttribute("courses", studentService.getCourses(id));
+        return "add_student_course";   
+    }
+	
+	@RequestMapping(value = "/student-course/add-course/{id}", method = RequestMethod.POST)    
+    public String addStudentCourse(@Valid @ModelAttribute("course") Course course, BindingResult result, Model model, @PathVariable int id){
+		model.addAttribute("courses", studentService.getCourses(id));
+		model.addAttribute("studentId", id);
+		if (result.hasErrors()) {
+			model.addAttribute("status", "error");
+			model.addAttribute("msg", "Something wrong. Try Again.");
+            return "add_student_course";
+        }
+		studentService.addStudentCourse(id, course.getCourseId());
+		model.addAttribute("status", "success");
+		model.addAttribute("msg", "Student Course added.");
+        return "add_student_course";   
+    }
+	
+	@RequestMapping(value="/student-course/delete-course/{studentId}/{courseId}",method = RequestMethod.GET)    
+    public String deleteStudentCourse(@PathVariable int studentId, @PathVariable int courseId){   
+		try {
+			studentService.deleteStudentCourse(studentId, courseId);
+			return "redirect:/student-course/" + studentId;   
+		}
+		catch(Exception e) {
+			return "redirect:/student-course/" + studentId;
+		}
+    } 
 
 }

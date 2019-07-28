@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
+import com.my_school.model.Course;
 import com.my_school.model.Student;
 
 @Repository
@@ -71,6 +72,64 @@ public class StudentDAOImpl implements StudentDAO{
 		String sql="update student set first_name = ?, last_name = ?, address = ?, contact_number = ? where student_id = ?;";    
 	    return jdbcTemplate.update(sql, new Object[] {
 	    		s.getFirstName(), s.getLastName(), s.getAddress(), s.getContactNumber(), s.getStudentId()
+	    });  
+	}
+
+	public List<Course> getStudentCourses(int id) {
+		String sql = "select c.* from student_course sc, course c where sc.student_id = ? and sc.course_id = c.course_id;";
+
+        List<Course> courseList = jdbcTemplate.query(sql, new Object[]{id}, new ResultSetExtractor<List<Course>>()
+        {
+            public List<Course> extractData(ResultSet rs) throws SQLException, DataAccessException
+            {
+                List<Course> list = new ArrayList<Course>();
+                while (rs.next())
+                {
+                	Course course = new Course();
+                	course.setCourseId(rs.getInt("course_id"));
+                	course.setCourseName(rs.getString("course_name"));
+                    list.add(course);
+                }
+                return list;
+            }
+
+        });
+        return courseList;
+	}
+
+	public List<Course> getCourses(int id) {
+		String sql = "select c.* from course c where c.course_id not in (select sc.course_id from student_course sc where sc.student_id = ?);";
+
+        List<Course> courseList = jdbcTemplate.query(sql, new Object[]{id}, new ResultSetExtractor<List<Course>>()
+        {
+            public List<Course> extractData(ResultSet rs) throws SQLException, DataAccessException
+            {
+                List<Course> list = new ArrayList<Course>();
+                while (rs.next())
+                {
+                	Course course = new Course();
+                	course.setCourseId(rs.getInt("course_id"));
+                	course.setCourseName(rs.getString("course_name"));
+                    list.add(course);
+                }
+                return list;
+            }
+
+        });
+        return courseList;
+	}
+
+	public int addStudentCourse(int studentId, int courseId) {
+		String sql="insert into student_course(student_id, course_id) values(?, ?);";    
+	    return jdbcTemplate.update(sql, new Object[] {
+	    		studentId, courseId
+	    });
+	}
+
+	public int deleteStudentCourse(int studentId, int courseId) {
+		String sql="delete from student_course where student_id=? and course_id=?";    
+		return jdbcTemplate.update(sql, new Object[] {
+				studentId, courseId
 	    });  
 	}
 
